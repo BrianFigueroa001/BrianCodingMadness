@@ -5,32 +5,15 @@ public class Stack {
     //currently 8
 
     public void push(TreeNode treeNode) throws Exception { // Inserts a TreeNode into the stack
-        if (isEmpty()) {
-            firstTop = new StackNode(treeNode);
-            return;
-        }
-        StackNode currentTop = firstTop;
-        while (currentTop.getNext() != null){
-            currentTop = currentTop.getNext();
-        }
         StackNode newTop = new StackNode(treeNode);
-        currentTop.setNext(newTop);
+        newTop.setNext(firstTop);
+        firstTop = newTop;
     }
+
     public TreeNode pop() throws Exception { //Returns and removes the top TreeNode from the stack
-        StackNode currentTop = firstTop;
-        if(currentTop.getNext() != null) {
-            while (currentTop.getNext().getNext() != null) {
-                currentTop = currentTop.getNext();
-            }
-            TreeNode popNode = currentTop.getNext().getTreeNode();
-            currentTop.setNext(null);
-            return popNode;
-        }
-        else {
-            TreeNode popNode = currentTop.getTreeNode();
-            firstTop = null;
-            return popNode;
-        }
+        TreeNode pop = firstTop.getTreeNode();
+        firstTop = firstTop.getNext();
+        return pop;
     }
     //currentRoot: 5
     //Stack:8
